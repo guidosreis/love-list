@@ -1,3 +1,9 @@
-<p>
-  thing-list works!
-</p>
+<div class="thing-list" *ngIf="things">
+  <div class="thing" *ngFor="let thing of things">
+    <span class="thing-name">{{thing.name}}</span>
+    <button class="btn btn-like" (click)="rate(thing)">
+      <i class="fa fa-heart"></i>
+      <span class="rating">{{thing.rating}}</span>
+    </button>
+  </div>
+</div>
