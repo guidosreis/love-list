@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { ThingListComponent } from './thing-list/thing-list.component';
 
 import { ThingsService } from './services/things.service';
+import { ThingSectionComponent } from './thing-section/thing-section.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ThingListComponent
+    ThingListComponent,
+    ThingSectionComponent
   ],
   imports: [
     BrowserModule,
