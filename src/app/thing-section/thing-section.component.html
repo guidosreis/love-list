@@ -1,1 +1,4 @@
-<thing-list [things]="things$ | async"></thing-list>
+<thing-list
+  [things]="things$ | async"
+  (thingRated)="onThingRated($event)"
+></thing-list>

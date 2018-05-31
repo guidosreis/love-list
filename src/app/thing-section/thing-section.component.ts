@@ -19,4 +19,8 @@ export class ThingSectionComponent implements OnInit {
     this.things$ = this.thingsService.getThings();
   }
 
+  onThingRated(thing: Thing) {
+    console.log('thing:', thing);
+  }
+
 }

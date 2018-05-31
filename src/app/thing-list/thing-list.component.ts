@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Thing } from '../thing-section/thing.model';
 
@@ -10,10 +10,12 @@ import { Thing } from '../thing-section/thing.model';
 export class ThingListComponent {
   @Input() things: Thing[];
 
+  @Output() thingRated = new EventEmitter();
+
   constructor() { }
 
   rate(thing) {
-    console.log('thing: ', thing);
+    this.thingRated.next(thing);
   }
 
 }
