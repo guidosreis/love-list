@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { StoreData } from './store-data';
+import { ApplicationState } from './application-state';
 import {
   THING_RATED_ACTION, ThingRatedAction,
   THING_ADDED_ACTION, ThingAddedAction,
@@ -8,7 +8,7 @@ import {
  } from './actions';
 import { Thing } from '../thing-section/thing.model';
 
-export function storeData(state: StoreData, action: Action): StoreData {
+export function applicationState(state: ApplicationState, action: Action): ApplicationState {
   switch (action.type) {
     case THING_RATED_ACTION:
       return handleThingRatedAction(state, <any>action);
@@ -24,8 +24,8 @@ export function storeData(state: StoreData, action: Action): StoreData {
   }
 }
 
-function handleThingRatedAction(state: StoreData, action: ThingRatedAction) {
-  const newState: StoreData = {...state};
+function handleThingRatedAction(state: ApplicationState, action: ThingRatedAction) {
+  const newState: ApplicationState = {...state};
   const index = newState.things.findIndex(t => t.name === action.payload.name);
   const rating = newState[index].rating;
 
@@ -34,8 +34,8 @@ function handleThingRatedAction(state: StoreData, action: ThingRatedAction) {
   return newState;
 }
 
-function handleThingAddedAction(state: StoreData, action: ThingAddedAction) {
-  const newState: StoreData = {...state};
+function handleThingAddedAction(state: ApplicationState, action: ThingAddedAction) {
+  const newState: ApplicationState = {...state};
   const thing = newState.things.find(t => t.name === action.payload);
 
   if (thing) {
@@ -53,8 +53,8 @@ function handleThingAddedAction(state: StoreData, action: ThingAddedAction) {
   return newState;
 }
 
-function handleThingRemovedAction(state: StoreData, action: ThingRemovedAction) {
-  const newState: StoreData = {...state};
+function handleThingRemovedAction(state: ApplicationState, action: ThingRemovedAction) {
+  const newState: ApplicationState = {...state};
   const index = newState.things.findIndex(t => t.name === action.payload.name);
 
   newState.things.splice(index, 1);
