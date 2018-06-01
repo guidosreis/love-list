@@ -2,10 +2,21 @@ import { Action } from '@ngrx/store';
 
 import { Thing } from '../thing-section/thing.model';
 
-export const FETCH_THINGS = 'FETCH_THINGS';
+export const FETCH_THINGS_ACTION = 'FETCH_THINGS_ACTION';
+export const THINGS_FETCHED_ACTION = 'THINGS_FETCHED_ACTION';
 export const THING_RATED_ACTION = 'THING_RATED_ACTION';
 export const THING_ADDED_ACTION = 'THING_ADDED_ACTION';
 export const THING_REMOVED_ACTION = 'THING_REMOVED_ACTION';
+
+export class FetchThingsAction implements Action {
+  readonly type = FETCH_THINGS_ACTION;
+}
+
+export class ThingsFetchedAction implements Action {
+  readonly type = THINGS_FETCHED_ACTION;
+
+  constructor(public payload: Thing[]) { }
+}
 
 export class ThingRatedAction implements Action {
   readonly type = THING_RATED_ACTION;
