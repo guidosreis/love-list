@@ -1,22 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule, INIT } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppComponent } from './app.component';
+import { ThingSectionComponent } from './thing-section/thing-section.component';
 import { ThingListComponent } from './thing-list/thing-list.component';
 
 import { ThingsService } from './services/things.service';
-import { ThingSectionComponent } from './thing-section/thing-section.component';
+
+import { INITIAL_APPLICATION_STATE, ApplicationState } from './store/application-state';
+import { FetchThingsEffectService } from './store/effects/fetch-things-effect.service';
+import { reducer } from './store/reducer';
+
+export function reducerFactory() {
+  return reducer;
+}
 
 @NgModule({
   declarations: [
     AppComponent,
-    ThingListComponent,
-    ThingSectionComponent
+    ThingSectionComponent,
+    ThingListComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(null, {reducerFactory, initialState: INITIAL_APPLICATION_STATE}),
+    EffectsModule.forRoot([
+      FetchThingsEffectService
+    ])
   ],
   providers: [
     ThingsService
