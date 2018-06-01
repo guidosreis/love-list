@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Thing } from './thing.model';
 import { ThingsService } from '../services/things.service';
 import { ApplicationState } from '../store/application-state';
-import { FetchThingsAction, ThingRatedAction } from '../store/actions';
+import { FetchThingsAction, ThingRatedAction, ThingRemovedAction } from '../store/actions';
 
 function stateToThingsSelector(state: ApplicationState): Thing[] {
   return state.things;
@@ -30,6 +30,10 @@ export class ThingSectionComponent implements OnInit {
 
   onThingRated(thing: Thing) {
     this.store.dispatch(new ThingRatedAction(thing));
+  }
+
+  onThingRemoved(thing: Thing) {
+    this.store.dispatch(new ThingRemovedAction(thing));
   }
 
 }
