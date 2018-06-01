@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
 import { Thing } from './thing.model';
 import { ThingsService } from '../services/things.service';
+import { ApplicationState } from '../store/application-state';
+import { FetchThingsAction, ThingRatedAction } from '../store/actions';
+
+function stateToThingsSelector(state: ApplicationState): Thing[] {
+  return state.things;
+}
 
 @Component({
   selector: 'thing-section',
@@ -13,14 +20,16 @@ import { ThingsService } from '../services/things.service';
 export class ThingSectionComponent implements OnInit {
   things$: Observable<Thing[]>;
 
-  constructor(private thingsService: ThingsService) { }
+  constructor(private store: Store<ApplicationState>) {
+    this.things$ = store.select(stateToThingsSelector);
+  }
 
   ngOnInit() {
-    this.things$ = this.thingsService.getThings();
+    this.store.dispatch(new FetchThingsAction());
   }
 
   onThingRated(thing: Thing) {
-    console.log('thing:', thing);
+    this.store.dispatch(new ThingRatedAction(thing));
   }
 
 }
