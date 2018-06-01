@@ -1,15 +1,19 @@
 import { Action } from '@ngrx/store';
 
-import { ApplicationState } from './application-state';
+import { ApplicationState, INITIAL_APPLICATION_STATE } from './application-state';
 import {
+  THINGS_FETCHED_ACTION, ThingsFetchedAction,
   THING_RATED_ACTION, ThingRatedAction,
   THING_ADDED_ACTION, ThingAddedAction,
   THING_REMOVED_ACTION, ThingRemovedAction
  } from './actions';
 import { Thing } from '../thing-section/thing.model';
 
-export function applicationState(state: ApplicationState, action: Action): ApplicationState {
+export function reducer(state: ApplicationState, action: Action): ApplicationState {
   switch (action.type) {
+    case THINGS_FETCHED_ACTION:
+      return handleThingsFetchedAction(state, <any>action);
+
     case THING_RATED_ACTION:
       return handleThingRatedAction(state, <any>action);
 
@@ -24,12 +28,17 @@ export function applicationState(state: ApplicationState, action: Action): Appli
   }
 }
 
+function handleThingsFetchedAction(state: ApplicationState, action: ThingsFetchedAction): ApplicationState {
+  return { things: action.payload };
+}
+
 function handleThingRatedAction(state: ApplicationState, action: ThingRatedAction) {
   const newState: ApplicationState = {...state};
-  const index = newState.things.findIndex(t => t.name === action.payload.name);
-  const rating = newState[index].rating;
+  const { things } = newState;
+  const index = things.findIndex(t => t.name === action.payload.name);
+  const rating = things[index].rating;
 
-  newState[index].rating = rating + 1;
+  things[index].rating = rating + 1;
 
   return newState;
 }
