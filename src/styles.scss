@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+@import url('./assets/css/normalize.css');
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
 
 body {
   background-color: #eee;
