@@ -32,8 +32,8 @@ export class ThingSectionComponent implements OnInit {
     this.store.dispatch(new ThingRatedAction(thing));
   }
 
-  onThingRemoved(thing: Thing) {
-    this.store.dispatch(new ThingRemovedAction(thing));
+  onThingRemoved(index: number) {
+    this.store.dispatch(new ThingRemovedAction(index));
   }
 
   addThing(event) {

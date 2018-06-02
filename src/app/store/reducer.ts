@@ -68,10 +68,9 @@ function handleThingAddedAction(state: ApplicationState, action: ThingAddedActio
 }
 
 function handleThingRemovedAction(state: ApplicationState, action: ThingRemovedAction) {
-  const newState: ApplicationState = {...state};
-  const index = newState.things.findIndex(t => t.name === action.payload.name);
+  const newState = {...state};
 
-  newState.things.splice(index, 1);
+  newState.things.splice(action.payload, 1);
   return newState;
 }
 

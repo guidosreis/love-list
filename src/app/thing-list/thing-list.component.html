@@ -1,11 +1,11 @@
 <div class="thing-list" *ngIf="things">
-  <div class="thing" *ngFor="let thing of things">
+  <div class="thing" *ngFor="let thing of things; let i = index">
     <span class="thing-name">{{thing.name}}</span>
     <button class="btn btn-like" (click)="rate(thing)">
       <i class="fa fa-heart"></i>
       <span class="rating">{{thing.rating}}</span>
     </button>
-    <button class="btn btn-remove" (click)="remove(thing)">
+    <button class="btn btn-remove" (click)="remove(i)">
       <i class="fa fa-trash"></i>
     </button>
   </div>

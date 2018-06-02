@@ -19,8 +19,8 @@ export class ThingListComponent {
     this.thingRated.next(thing);
   }
 
-  remove(thing) {
-    this.thingRemoved.next(thing);
+  remove(index) {
+    this.thingRemoved.next(index);
   }
 
 }

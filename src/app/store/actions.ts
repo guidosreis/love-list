@@ -34,7 +34,7 @@ export class ThingAddedAction implements Action {
 export class ThingRemovedAction implements Action {
   readonly type = THING_REMOVED_ACTION;
 
-  constructor(public payload: Thing) { }
+  constructor(public payload: number) { }
 }
 
 export class SortThingsAction implements Action {
