@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import {
   THING_RATED_ACTION,
   THING_ADDED_ACTION,
+  THINGS_FETCHED_ACTION,
   SortThingsAction,
 } from '../actions';
 
@@ -18,7 +19,7 @@ export class RateThingEffectService {
   constructor(private actions$: Actions) { }
 
   @Effect() things$: Observable<Action> = this.actions$
-    .ofType(THING_RATED_ACTION, THING_ADDED_ACTION)
+    .ofType(THINGS_FETCHED_ACTION, THING_RATED_ACTION, THING_ADDED_ACTION)
     .pipe(
       map(() => new SortThingsAction())
     );
