@@ -1,5 +1,14 @@
-<thing-list
-  [things]="things$ | async"
-  (thingRated)="onThingRated($event)"
-  (thingRemoved)="onThingRemoved($event)"
-></thing-list>
+<div class="things">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Type something and press Enter"
+    (keyup.enter)="addThing($event)"
+  >
+
+  <thing-list
+    [things]="things$ | async"
+    (thingRated)="onThingRated($event)"
+    (thingRemoved)="onThingRemoved($event)"
+  ></thing-list>
+</div>
