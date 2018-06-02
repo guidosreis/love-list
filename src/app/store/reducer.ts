@@ -38,12 +38,11 @@ function handleThingsFetchedAction(state: ApplicationState, action: ThingsFetche
 }
 
 function handleThingRatedAction(state: ApplicationState, action: ThingRatedAction) {
-  const newState: ApplicationState = {...state};
+  const newState = {...state};
   const { things } = newState;
-  const index = things.findIndex(t => t.name === action.payload.name);
-  const rating = things[index].rating;
+  const index = action.payload;
 
-  things[index].rating = rating + 1;
+  things[index].rating++;
 
   return newState;
 }

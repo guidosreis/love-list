@@ -22,7 +22,7 @@ export class ThingsFetchedAction implements Action {
 export class ThingRatedAction implements Action {
   readonly type = THING_RATED_ACTION;
 
-  constructor(public payload: Thing) { }
+  constructor(public payload: number) { }
 }
 
 export class ThingAddedAction implements Action {

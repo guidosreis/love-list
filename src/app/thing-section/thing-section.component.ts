@@ -28,8 +28,8 @@ export class ThingSectionComponent implements OnInit {
     this.store.dispatch(new FetchThingsAction());
   }
 
-  onThingRated(thing: Thing) {
-    this.store.dispatch(new ThingRatedAction(thing));
+  onThingRated(index: number) {
+    this.store.dispatch(new ThingRatedAction(index));
   }
 
   onThingRemoved(index: number) {

@@ -15,8 +15,8 @@ export class ThingListComponent {
 
   constructor() { }
 
-  rate(thing) {
-    this.thingRated.next(thing);
+  rate(index) {
+    this.thingRated.next(index);
   }
 
   remove(index) {
