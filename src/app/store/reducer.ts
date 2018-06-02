@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { ApplicationState, INITIAL_APPLICATION_STATE } from './application-state';
+import { sortThings } from './sortThings';
 import {
   THINGS_FETCHED_ACTION, ThingsFetchedAction,
   THING_RATED_ACTION, ThingRatedAction,
@@ -9,7 +10,6 @@ import {
   SORT_THINGS_ACTION, SortThingsAction
  } from './actions';
 import { Thing } from '../thing-section/thing.model';
-import { cleanSession } from 'selenium-webdriver/safari';
 
 export function reducer(state: ApplicationState, action: Action): ApplicationState {
   switch (action.type) {
@@ -75,20 +75,7 @@ function handleThingRemovedAction(state: ApplicationState, action: ThingRemovedA
 
 function handleSortThingsAction(state: ApplicationState, action: SortThingsAction) {
   const newState = {...state};
-  const { things } = newState;
 
-  things.sort(sortThings);
+  newState.things.sort(sortThings);
   return newState;
-}
-
-function sortThings(cur, next) {
-  if (cur.rating === next.rating) {
-    return 0;
-  }
-
-  if (cur.rating > next.rating) {
-    return -1;
-  } else {
-    return 1;
-  }
 }
