@@ -12,6 +12,7 @@ import { ThingsService } from './services/things.service';
 
 import { INITIAL_APPLICATION_STATE, ApplicationState } from './store/application-state';
 import { FetchThingsEffectService } from './store/effects/fetch-things-effect.service';
+import { RateThingEffectService } from './store/effects/rate-thing-effect.service';
 import { reducer } from './store/reducer';
 
 export function reducerFactory() {
@@ -29,7 +30,8 @@ export function reducerFactory() {
     HttpClientModule,
     StoreModule.forRoot(null, {reducerFactory, initialState: INITIAL_APPLICATION_STATE}),
     EffectsModule.forRoot([
-      FetchThingsEffectService
+      FetchThingsEffectService,
+      RateThingEffectService
     ])
   ],
   providers: [
