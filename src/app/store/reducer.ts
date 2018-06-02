@@ -5,9 +5,11 @@ import {
   THINGS_FETCHED_ACTION, ThingsFetchedAction,
   THING_RATED_ACTION, ThingRatedAction,
   THING_ADDED_ACTION, ThingAddedAction,
-  THING_REMOVED_ACTION, ThingRemovedAction
+  THING_REMOVED_ACTION, ThingRemovedAction,
+  SORT_THINGS_ACTION, SortThingsAction
  } from './actions';
 import { Thing } from '../thing-section/thing.model';
+import { cleanSession } from 'selenium-webdriver/safari';
 
 export function reducer(state: ApplicationState, action: Action): ApplicationState {
   switch (action.type) {
@@ -22,6 +24,9 @@ export function reducer(state: ApplicationState, action: Action): ApplicationSta
 
     case THING_REMOVED_ACTION:
       return handleThingRemovedAction(state, <any>action);
+
+    case SORT_THINGS_ACTION:
+      return handleSortThingsAction(state, <any>action);
 
     default:
       return state;
@@ -68,4 +73,24 @@ function handleThingRemovedAction(state: ApplicationState, action: ThingRemovedA
 
   newState.things.splice(index, 1);
   return newState;
+}
+
+function handleSortThingsAction(state: ApplicationState, action: SortThingsAction) {
+  const newState = {...state};
+  const { things } = newState;
+
+  things.sort(sortThings);
+  return newState;
+}
+
+function sortThings(cur, next) {
+  if (cur.rating === next.rating) {
+    return 0;
+  }
+
+  if (cur.rating > next.rating) {
+    return -1;
+  } else {
+    return 1;
+  }
 }
