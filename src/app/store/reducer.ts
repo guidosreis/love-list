@@ -39,21 +39,17 @@ function handleThingsFetchedAction(state: ApplicationState, action: ThingsFetche
 
 function handleThingRatedAction(state: ApplicationState, action: ThingRatedAction) {
   const newState = {...state};
-  const { things } = newState;
-  const index = action.payload;
 
-  things[index].rating++;
-
+  newState.things[action.payload].rating++;
   return newState;
 }
 
 function handleThingAddedAction(state: ApplicationState, action: ThingAddedAction) {
-  const newState: ApplicationState = {...state};
-  const thing = newState.things.find(t => t.name === action.payload);
+  const newState = {...state};
+  const thing = newState.things.find(t => t.name.toLowerCase() === action.payload.toLowerCase());
 
   if (thing) {
-    const rating = thing.rating;
-    thing.rating = rating + 1;
+    thing.rating++;
   } else {
     const newThing: Thing = {
       name: action.payload,
