@@ -56,6 +56,10 @@ export class ThingSectionComponent implements OnInit {
   }
 
   addThing(event) {
+    const name = event.target.value;
+
+    if (!name) { return false; }
+
     this.store.dispatch(new ThingAddedAction(event.target.value));
     event.target.value = '';
   }
