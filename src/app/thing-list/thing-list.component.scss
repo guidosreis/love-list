@@ -1,10 +1,15 @@
 .thing {
-  padding: .75em 0;
+  padding: .75em;
   display: flex;
   align-items: center;
+  transition: background-color .3s;
 
   &:not(:last-child) {
     border-bottom: 1px dashed #d4d4d4;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, .1);
   }
 }
 
