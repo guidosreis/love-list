@@ -20,7 +20,6 @@ function stateToThingsSelector(state: ApplicationState): Thing[] {
 })
 export class ThingSectionComponent implements OnInit {
   things$: Observable<Thing[]>;
-  randomizer$: Observable<any>;
 
   constructor(private store: Store<ApplicationState>) {
     this.things$ = store.select(stateToThingsSelector);
