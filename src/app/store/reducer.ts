@@ -40,7 +40,10 @@ function handleThingsFetchedAction(state: ApplicationState, action: ThingsFetche
 function handleThingRatedAction(state: ApplicationState, action: ThingRatedAction) {
   const newState = {...state};
 
-  newState.things[action.payload].rating++;
+  if (newState.things[action.payload]) {
+    newState.things[action.payload].rating++;
+  }
+
   return newState;
 }
 
