@@ -49,10 +49,12 @@ describe('ThingListComponent', () => {
     expect(thingsEl.getElementsByClassName('thing').length).toBe(2);
   });
 
-  fit('should contain Javascript in the first item', () => {
-    const firstItemEl = thingsEl.getElementsByClassName('thing').item(0);
-    const itemNameEl = firstItemEl.getElementsByClassName('thing-name').item(0);
-    expect(itemNameEl.textContent).toBe('Javascript');
+  fit('should list contains', () => {
+    component.things.forEach((thing, index) => {
+      const thingEl = thingsEl.getElementsByClassName('thing').item(index);
+      const nameEl = thingEl.getElementsByClassName('thing-name').item(0);
+      expect(nameEl.textContent).toBe(thing.name);
+    });
   });
 
   fit('should emit thingRated event when rate button is clicked', () => {
