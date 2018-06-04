@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { Observable, of, timer } from 'rxjs';
+import { switchMap, repeat, mapTo } from 'rxjs/operators';
 
 import { Thing } from './thing.model';
 import { ThingsService } from '../services/things.service';
@@ -19,6 +20,7 @@ function stateToThingsSelector(state: ApplicationState): Thing[] {
 })
 export class ThingSectionComponent implements OnInit {
   things$: Observable<Thing[]>;
+  randomizer$: Observable<any>;
 
   constructor(private store: Store<ApplicationState>) {
     this.things$ = store.select(stateToThingsSelector);
@@ -26,6 +28,23 @@ export class ThingSectionComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new FetchThingsAction());
+    this.things$.subscribe(things => {
+      if (things.length) {
+        of('').pipe(
+          switchMap(
+            () => timer(this.getRandomNumber(1000, 5000)).pipe(
+              mapTo(this.getRandomNumber(0, (things.length - 1)))
+            )
+          ),
+          repeat()
+        )
+        .subscribe(index => this.store.dispatch(new ThingRatedAction(index)));
+      }
+    });
+  }
+
+  getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   onThingRated(index: number) {
