@@ -11,7 +11,7 @@ import {
  } from './actions';
 import { Thing } from '../thing-section/thing.model';
 
-export function reducer(state: ApplicationState, action: Action): ApplicationState {
+export function reducer(state: ApplicationState = INITIAL_APPLICATION_STATE, action: Action): ApplicationState {
   switch (action.type) {
     case THINGS_FETCHED_ACTION:
       return handleThingsFetchedAction(state, <any>action);
