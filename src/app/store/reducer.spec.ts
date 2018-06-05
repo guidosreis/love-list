@@ -1,6 +1,7 @@
 import * as fromApplicationState from './application-state';
 import * as fromReducer from './reducer';
 import * as fromActions from './actions';
+import { sortThings } from './sortThings';
 import { Thing } from '../thing-section/thing.model';
 
 describe('Reducer', () => {
@@ -96,6 +97,24 @@ describe('Reducer', () => {
       const state = fromReducer.reducer({things: mock}, action);
 
       expect(state.things).toEqual(mock);
+    });
+  });
+
+  describe('SORT_THINGS action', () => {
+    const action = new fromActions.SortThingsAction();
+
+    fit('should sort by name if two or more things have same rating value', () => {
+      const store = fromReducer.reducer({things: mock}, action);
+
+      expect(store.things).toEqual(mock.sort(sortThings));
+    });
+
+    fit('should sort by the highest rated item to the lowest rated item', () => {
+      mock[validIndex].rating = 1;
+
+      const store = fromReducer.reducer({things: mock}, action);
+
+      expect(store.things).toEqual(mock);
     });
   });
 });
