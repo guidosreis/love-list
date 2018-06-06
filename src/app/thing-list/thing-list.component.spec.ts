@@ -4,24 +4,13 @@ import { ThingListComponent } from './thing-list.component';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { Thing } from '../thing-section/thing.model';
+import { things } from '../thing-section/things.mock';
 
 describe('ThingListComponent', () => {
   let component: ThingListComponent;
   let fixture: ComponentFixture<ThingListComponent>;
   let thingsDe: DebugElement;
   let thingsEl: HTMLElement;
-
-  const mock: Thing[] = [
-    {
-      name: 'Javascript',
-      rating: 0
-    },
-    {
-      name: 'Angular',
-      rating: 0
-    }
-  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,7 +22,7 @@ describe('ThingListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ThingListComponent);
     component = fixture.componentInstance;
-    component.things = mock;
+    component.things = things;
 
     fixture.detectChanges();
 
@@ -45,8 +34,8 @@ describe('ThingListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display 2 items', () => {
-    expect(thingsEl.getElementsByClassName('thing').length).toBe(2);
+  it(`should display ${things.length} items`, () => {
+    expect(thingsEl.getElementsByClassName('thing').length).toBe(things.length);
   });
 
   it('should list contains', () => {
