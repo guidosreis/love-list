@@ -41,15 +41,15 @@ describe('ThingListComponent', () => {
     thingsEl = thingsDe.nativeElement;
   });
 
-  fit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('should display 2 items', () => {
+  it('should display 2 items', () => {
     expect(thingsEl.getElementsByClassName('thing').length).toBe(2);
   });
 
-  fit('should list contains', () => {
+  it('should list contains', () => {
     component.things.forEach((thing, index) => {
       const thingEl = thingsEl.getElementsByClassName('thing').item(index);
       const nameEl = thingEl.getElementsByClassName('thing-name').item(0);
@@ -57,7 +57,7 @@ describe('ThingListComponent', () => {
     });
   });
 
-  fit('should emit thingRated event when rate button is clicked', () => {
+  it('should emit thingRated event when rate button is clicked', () => {
     let index: number;
     const buttonsDe = fixture.debugElement.queryAll(By.css('.btn-like'));
 
@@ -69,7 +69,7 @@ describe('ThingListComponent', () => {
     });
   });
 
-  fit('should emit thingRemoved event when remove button is clicked', () => {
+  it('should emit thingRemoved event when remove button is clicked', () => {
     let index: number;
     const buttonsDe = fixture.debugElement.queryAll(By.css('.btn-remove'));
 

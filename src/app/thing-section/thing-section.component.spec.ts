@@ -37,17 +37,17 @@ describe('ThingSectionComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('should dispatch an action to load data when created', () => {
+  it('should dispatch an action to load data when created', () => {
     const action = new fromActions.FetchThingsAction();
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  fit('should display a list of things after the data is loaded', () => {
+  it('should display a list of things after the data is loaded', () => {
     const mock: Thing[] = [
       {
         name: 'Javascript',
@@ -69,7 +69,7 @@ describe('ThingSectionComponent', () => {
   });
 
   describe('onThingRated', () => {
-    fit('should dispatch an action', () => {
+    it('should dispatch an action', () => {
       const index = 1;
       const action = new fromActions.ThingRatedAction(index);
 
@@ -80,7 +80,7 @@ describe('ThingSectionComponent', () => {
   });
 
   describe('onThingRemoved', () => {
-    fit('should dispatch an actio', () => {
+    it('should dispatch an actio', () => {
       const index = 1;
       const action = new fromActions.ThingRemovedAction(index);
 
@@ -91,7 +91,7 @@ describe('ThingSectionComponent', () => {
   });
 
   describe('addThing', () => {
-    fit('should do nothing if input is blank', () => {
+    it('should do nothing if input is blank', () => {
       const inputEl = fixture.debugElement.query(By.css('.form-control')).nativeElement;
       const event = new KeyboardEvent('keyup', {
         'key': 'Enter'
@@ -102,7 +102,7 @@ describe('ThingSectionComponent', () => {
       expect(inputEl.dispatchEvent(event)).toBeFalsy();
     });
 
-    fit('should dispatch an action if input value is filled', () => {
+    it('should dispatch an action if input value is filled', () => {
       const name = 'Angular';
       const action = new fromActions.ThingAddedAction(name);
       const inputEl = fixture.debugElement.query(By.css('.form-control')).nativeElement;

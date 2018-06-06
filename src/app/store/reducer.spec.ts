@@ -28,7 +28,7 @@ describe('Reducer', () => {
   });
 
   describe('undefined action', () => {
-    fit('should return the default state', () => {
+    it('should return the default state', () => {
       const action = { type: undefined };
       const state = fromReducer.reducer(undefined, action);
 
@@ -37,7 +37,7 @@ describe('Reducer', () => {
   });
 
   describe('THINGS_FETCHED action', () => {
-    fit('should populate things list', () => {
+    it('should populate things list', () => {
       const action = new fromActions.ThingsFetchedAction(mock);
       const state = fromReducer.reducer(INITIAL_APPLICATION_STATE, action);
 
@@ -46,14 +46,14 @@ describe('Reducer', () => {
   });
 
   describe('THING_RATED action', () => {
-    fit('should return a clone of original state when can not find the thing', () => {
+    it('should return a clone of original state when can not find the thing', () => {
       const action = new fromActions.ThingRatedAction(invalidIndex);
       const state = fromReducer.reducer({things: mock}, action);
 
       expect(state.things).toEqual(mock);
     });
 
-    fit('should increase the rating of thing given its index', () => {
+    it('should increase the rating of thing given its index', () => {
       const action = new fromActions.ThingRatedAction(validIndex);
       const state = fromReducer.reducer({things: mock}, action);
       const thing = state.things[validIndex];
@@ -63,7 +63,7 @@ describe('Reducer', () => {
   });
 
   describe('THING_ADDED action', () => {
-    fit('should increase the rating when thing already exists', () => {
+    it('should increase the rating when thing already exists', () => {
       const payload = mock[validIndex].name;
       const action = new fromActions.ThingAddedAction(payload);
       const state = fromReducer.reducer({things: mock}, action);
@@ -72,7 +72,7 @@ describe('Reducer', () => {
       expect(thing.rating).toBe(1);
     });
 
-    fit('should append a new item to the list', () => {
+    it('should append a new item to the list', () => {
       const payload = 'Typescript';
       const action = new fromActions.ThingAddedAction(payload);
       const state = fromReducer.reducer(INITIAL_APPLICATION_STATE, action);
@@ -85,14 +85,14 @@ describe('Reducer', () => {
   });
 
   describe('THING_REMOVE action', () => {
-    fit('should return a clone of original state when can not find the thing', () => {
+    it('should return a clone of original state when can not find the thing', () => {
       const action = new fromActions.ThingRatedAction(invalidIndex);
       const state = fromReducer.reducer({things: mock}, action);
 
       expect(state.things).toEqual(mock);
     });
 
-    fit ('should remove a item from list given its index', () => {
+    it ('should remove a item from list given its index', () => {
       const action = new fromActions.ThingRemovedAction(validIndex);
       const state = fromReducer.reducer({things: mock}, action);
 
@@ -103,13 +103,13 @@ describe('Reducer', () => {
   describe('SORT_THINGS action', () => {
     const action = new fromActions.SortThingsAction();
 
-    fit('should sort by name if two or more things have same rating value', () => {
+    it('should sort by name if two or more things have same rating value', () => {
       const store = fromReducer.reducer({things: mock}, action);
 
       expect(store.things).toEqual(mock.sort(sortThings));
     });
 
-    fit('should sort by the highest rated item to the lowest rated item', () => {
+    it('should sort by the highest rated item to the lowest rated item', () => {
       mock[validIndex].rating = 1;
 
       const store = fromReducer.reducer({things: mock}, action);

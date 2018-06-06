@@ -8,7 +8,7 @@ import {
 import { Thing } from '../thing-section/thing.model';
 
 describe('FetchThingsAction', () => {
-  fit('should create an action', () => {
+  it('should create an action', () => {
     const action = new FetchThingsAction();
 
     expect({...action}).toEqual({ type: FETCH_THINGS_ACTION });
@@ -16,7 +16,7 @@ describe('FetchThingsAction', () => {
 });
 
 describe('ThingsFetchedAction', () => {
-  fit('should create an action', () => {
+  it('should create an action', () => {
     const payload: Thing[] = [
       {
         name: 'Javascript',
@@ -37,7 +37,7 @@ describe('ThingsFetchedAction', () => {
 });
 
 describe('ThingRatedAction', () => {
-  fit('should create an action', () => {
+  it('should create an action', () => {
     const payload = 0;
     const action = new ThingRatedAction(payload);
 
@@ -49,7 +49,7 @@ describe('ThingRatedAction', () => {
 });
 
 describe('ThingRemovedAction', () => {
-  fit('should create an action', () => {
+  it('should create an action', () => {
     const payload = 0;
     const action = new ThingRemovedAction(payload);
 
@@ -61,7 +61,7 @@ describe('ThingRemovedAction', () => {
 });
 
 describe('ThingAddedAction', () => {
-  fit('should create an action', () => {
+  it('should create an action', () => {
     const payload = 'Angular';
     const action = new ThingAddedAction(payload);
 
@@ -75,7 +75,7 @@ describe('ThingAddedAction', () => {
 describe('SortThingsAction', () => {
   const action = new SortThingsAction();
 
-  fit('should create an action', () => {
+  it('should create an action', () => {
     expect({...action}).toEqual({ type: SORT_THINGS_ACTION });
   });
 });

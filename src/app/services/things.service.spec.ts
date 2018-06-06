@@ -22,12 +22,12 @@ describe('ThingsService', () => {
     httpMock.verify();
   });
 
-  fit('should be created', () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  fdescribe('getThings', () => {
-    fit('should return an Observable<Thing[]>', () => {
+  describe('getThings', () => {
+    it('should return an Observable<Thing[]>', () => {
       const mock: Thing[] = [
         {
           name: 'Javascript',
