@@ -5,7 +5,7 @@ import {
   ThingRemovedAction, THING_REMOVED_ACTION,
   ThingAddedAction, THING_ADDED_ACTION, SortThingsAction, SORT_THINGS_ACTION
 } from './actions';
-import { Thing } from '../thing-section/thing.model';
+import { things } from '../thing-section/things.mock';
 
 describe('FetchThingsAction', () => {
   it('should create an action', () => {
@@ -17,21 +17,11 @@ describe('FetchThingsAction', () => {
 
 describe('ThingsFetchedAction', () => {
   it('should create an action', () => {
-    const payload: Thing[] = [
-      {
-        name: 'Javascript',
-        rating: 0
-      },
-      {
-        name: 'Angular',
-        rating: 0
-      }
-    ];
-    const action = new ThingsFetchedAction(payload);
+    const action = new ThingsFetchedAction(things);
 
     expect({...action}).toEqual({
       type: THINGS_FETCHED_ACTION,
-      payload: payload
+      payload: things
     });
   });
 });
