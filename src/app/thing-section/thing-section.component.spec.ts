@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
 import { ThingSectionComponent } from './thing-section.component';
-import { Thing } from './thing.model';
+import { things } from './things.mock';
 import * as fromApplicationState from '../store/application-state';
 import * as fromReducer from '../store/reducer';
 import * as fromActions from '../store/actions';
@@ -48,23 +48,12 @@ describe('ThingSectionComponent', () => {
   });
 
   it('should display a list of things after the data is loaded', () => {
-    const mock: Thing[] = [
-      {
-        name: 'Javascript',
-        rating: 0
-      },
-      {
-        name: 'Angular',
-        rating: 0
-      }
-    ];
-
-    const action = new fromActions.ThingsFetchedAction(mock);
+    const action = new fromActions.ThingsFetchedAction(things);
 
     store.dispatch(action);
 
-    component.things$.subscribe(things => {
-      expect(things).toEqual(mock);
+    component.things$.subscribe(items => {
+      expect(items).toEqual(things);
     });
   });
 
