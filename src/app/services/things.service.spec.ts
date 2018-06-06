@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { ThingsService } from './things.service';
-import { Thing } from '../thing-section/thing.model';
+import { things } from '../thing-section/things.mock';
 
 describe('ThingsService', () => {
   let service: ThingsService;
@@ -28,25 +28,14 @@ describe('ThingsService', () => {
 
   describe('getThings', () => {
     it('should return an Observable<Thing[]>', () => {
-      const mock: Thing[] = [
-        {
-          name: 'Javascript',
-          rating: 0
-        },
-        {
-          name: 'Angular',
-          rating: 0
-        }
-      ];
-
-      service.getThings().subscribe(things => {
-        expect(things.length).toBe(2);
-        expect(things).toEqual(mock);
+      service.getThings().subscribe(items => {
+        expect(items.length).toBe(things.length);
+        expect(items).toEqual(things);
       });
 
       const req = httpMock.expectOne('assets/things.json');
       expect(req.request.method).toBe('GET');
-      req.flush(mock);
+      req.flush(things);
     });
   });
 });
