@@ -15,7 +15,15 @@ $ npm install
 $ npm start
 ```
 
+## How to run the tests
+```bash
+$ npm test
+```
+
 ## Observation
-I've decided to implement two new features:
-* add new thing that I love
-* remove anything that I don't love
+At a random time between 1000 and 5000 ms, one random thing is rated, adding 1 to its rating
+
+I've implemented two new features:
+
+* Add new thing that I love
+* Remove anything that I don't love
